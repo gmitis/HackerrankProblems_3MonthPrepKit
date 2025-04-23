@@ -23,9 +23,12 @@ class Result
 
     public static void miniMaxSum(List<int> arr)
     {
+        arr.Sort();
 
+        long min = arr.Take(4).Sum(x => (long)x);
+        long max = arr.Skip(arr.Count - 4).Sum(x => (long)x);
+        Console.WriteLine($"{min} {max}");
     }
-
 }
 
 class Solution
