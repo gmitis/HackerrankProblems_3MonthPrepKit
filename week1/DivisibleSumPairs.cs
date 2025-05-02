@@ -16,14 +16,27 @@ class Result
 {
 
     /*
-     * Complete the 'miniMaxSum' function below.
+     * Complete the 'divisibleSumPairs' function below.
      *
-     * The function accepts INTEGER_ARRAY arr as parameter.
+     * The function is expected to return an INTEGER.
+     * The function accepts following parameters:
+     *  1. INTEGER n
+     *  2. INTEGER k
+     *  3. INTEGER_ARRAY ar
      */
 
-    public static void miniMaxSum(List<int> arr)
+    public static int divisibleSumPairs(int n, int k, List<int> ar)
     {
+        int res = 0;
 
+        for (int i=0; i<n; i++)
+        {
+            for (int j=i+1; j<n; j++) 
+            {
+                if ( (ar[i]+ar[j])%k == 0 ) res++;
+            }
+        }
+        return res;
     }
 
 }
@@ -32,9 +45,21 @@ class Solution
 {
     public static void Main(string[] args)
     {
+        TextWriter textWriter = new StreamWriter(@System.Environment.GetEnvironmentVariable("OUTPUT_PATH"), true);
 
-        List<int> arr = Console.ReadLine().TrimEnd().Split(' ').ToList().Select(arrTemp => Convert.ToInt32(arrTemp)).ToList();
+        string[] firstMultipleInput = Console.ReadLine().TrimEnd().Split(' ');
 
-        Result.miniMaxSum(arr);
+        int n = Convert.ToInt32(firstMultipleInput[0]);
+
+        int k = Convert.ToInt32(firstMultipleInput[1]);
+
+        List<int> ar = Console.ReadLine().TrimEnd().Split(' ').ToList().Select(arTemp => Convert.ToInt32(arTemp)).ToList();
+
+        int result = Result.divisibleSumPairs(n, k, ar);
+
+        textWriter.WriteLine(result);
+
+        textWriter.Flush();
+        textWriter.Close();
     }
 }
